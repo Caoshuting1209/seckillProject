@@ -11,23 +11,21 @@ public class GoodsService {
     @Autowired(required = true)
     private GoodsMapper goodsMapper;
 
-    @Transactional(rollbackFor = Exception.class)
-    public Goods getGoods(Long id) {
-        return goodsMapper.findById(id);
-    }
-    @Transactional(rollbackFor = Exception.class)
-    public boolean insertGoods(Goods goods) {
-        return goodsMapper.insertGoods(goods);
+    public Goods getGoods(Long goodId) {
+        return goodsMapper.findById(goodId);
     }
 
-    @Transactional(rollbackFor = Exception.class)
-    public Goods updateGoodsName(Long id) {
-        Goods goods = getGoods(id);
-        goods.setName("newName");
-        return goods;
+    public boolean insertGoods(Goods goods) {
+        return goodsMapper.insert(goods) > 0;
     }
-    @Transactional(rollbackFor = Exception.class)
-    public boolean deleteGoods(Long id) {
-        return goodsMapper.deleteGoods(id);
+
+    public boolean updateGoods() {
+        Goods goods = getGoods(3L);
+        goods.setGoodId(2L);
+        return goodsMapper.updateById(goods) > 0;
+    }
+
+    public boolean deleteGoods(Long goodId) {
+        return goodsMapper.deleteById(goodId) > 0;
     }
 }

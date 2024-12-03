@@ -17,17 +17,4 @@ class SeckillProjectApplicationTests {
         List<Goods> goods = goodsMapper.selectList(null);
         goods.forEach(System.out::println);
     }
-    @Test
-    void insert(){
-        Goods goods = new Goods();
-        goods.setId(2L);
-        goods.setName("phone");
-        goods.setOriginalPrice(8700.00F);
-        goods.setCurrentPrice(6666.00F);
-        goods.setFreeDelivery(1);
-        goods.setStock(10);
-        goods.setDiscount();
-        goodsMapper.insertGoods(goods);
-        System.out.println(goods);
-    }
 }

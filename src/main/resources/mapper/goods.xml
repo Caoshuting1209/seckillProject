@@ -5,17 +5,7 @@
 
     <!-- 定义SQL语句 -->
     <select id="findById" parameterType="Long"  resultType="com.shuting.seckillproject.entity.Goods">
-        SELECT * FROM goods WHERE id = #{id}
+        SELECT * FROM goods WHERE good_id = #{good_id}
     </select>
-
-    <insert id="insertGoods" parameterType="com.shuting.seckillproject.entity.Goods" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO goods (id, name, originalPrice, currentPrice, freeDelivery, stock, discount)
-        VALUES (#{id}, #{name}, #{originalPrice}, #{currentPrice}, #{freeDelivery}, #{stock}, #{discount})
-    </insert>
-
-    <delete id="deleteGoods" parameterType="Long">
-        DELETE * FROM goods WHERE id = #{id}
-    </delete>
-
     <!-- 其他SQL操作，如INSERT, UPDATE, DELETE等 -->
 </mapper>

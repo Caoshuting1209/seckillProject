@@ -6,7 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GoodsMapper extends BaseMapper<Goods> {
-    public Goods findById(Long id);
-    public boolean insertGoods(Goods goods);
-    public boolean deleteGoods(Long id);
+    public Goods findById(Long goodId);
 }
