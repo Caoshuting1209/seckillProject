@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shuting.seckillproject.mapper.GoodsMapper">
+
+    <!-- 定义SQL语句 -->
+    <select id="findById" parameterType="Long"  resultType="com.shuting.seckillproject.entity.Goods">
+        SELECT * FROM goods WHERE id = #{id}
+    </select>
+
+    <insert id="insertGoods" parameterType="com.shuting.seckillproject.entity.Goods" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO goods (id, name, originalPrice, currentPrice, freeDelivery, stock, discount)
+        VALUES (#{id}, #{name}, #{originalPrice}, #{currentPrice}, #{freeDelivery}, #{stock}, #{discount})
+    </insert>
+
+    <delete id="deleteGoods" parameterType="Long">
+        DELETE * FROM goods WHERE id = #{id}
+    </delete>
+
+    <!-- 其他SQL操作，如INSERT, UPDATE, DELETE等 -->
+</mapper>
