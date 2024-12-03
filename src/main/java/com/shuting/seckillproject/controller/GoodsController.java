@@ -16,14 +16,10 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
-    @DeleteMapping("/delete/{gid}")
-    public ResponseEntity<Boolean> Onedelete(@PathVariable Long gid){
-        boolean res = goodsService.deleteGoods(gid);
-        if(res){
-            return ResponseEntity.ok(true);
-        }else{
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(false);
-        }
+    @GetMapping("/goods")
+    public String goodsName(Long gid){
+        Goods goods = goodsService.getGoods(gid);
+        return goods.getName();
     }
 
     @PostMapping("/insert1")
@@ -47,6 +43,16 @@ public class GoodsController {
     @PostMapping("/update1")
     public ResponseEntity<Boolean> update1(){
         boolean res = goodsService.updateGoods();
+        if(res){
+            return ResponseEntity.ok(true);
+        }else{
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(false);
+        }
+    }
+
+    @DeleteMapping("/delete/{gid}")
+    public ResponseEntity<Boolean> delete1(@PathVariable Long gid){
+        boolean res = goodsService.deleteGoods(gid);
         if(res){
             return ResponseEntity.ok(true);
         }else{

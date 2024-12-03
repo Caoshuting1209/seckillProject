@@ -2,14 +2,21 @@ package com.shuting.seckillproject.service.impl;
 
 import com.shuting.seckillproject.entity.Goods;
 import com.shuting.seckillproject.mapper.GoodsMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+
+import java.util.logging.Logger;
 
 @Service
+@Slf4j
 public class GoodsService {
     @Autowired(required = true)
     private GoodsMapper goodsMapper;
+
+    private static final Logger logger = Logger.getLogger(GoodsService.class.getName());
+
 
     public Goods getGoods(Long goodId) {
         return goodsMapper.findById(goodId);
@@ -20,12 +27,12 @@ public class GoodsService {
     }
 
     public boolean updateGoods() {
-        Goods goods = getGoods(3L);
-        goods.setGoodId(2L);
+        Goods goods = getGoods(2L);
+        goods.setGoodId(3L);
         return goodsMapper.updateById(goods) > 0;
     }
 
     public boolean deleteGoods(Long goodId) {
-        return goodsMapper.deleteById(goodId) > 0;
+        return goodsMapper.delById(goodId);
     }
 }

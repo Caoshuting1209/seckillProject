@@ -7,5 +7,9 @@
     <select id="findById" parameterType="Long"  resultType="com.shuting.seckillproject.entity.Goods">
         SELECT * FROM goods WHERE good_id = #{good_id}
     </select>
+
+    <delete id="delById" parameterType="Long">
+        DELETE FROM goods WHERE good_id = #{good_id}
+    </delete>
     <!-- 其他SQL操作，如INSERT, UPDATE, DELETE等 -->
 </mapper>
