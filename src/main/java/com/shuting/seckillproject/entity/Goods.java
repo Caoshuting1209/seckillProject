@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -14,7 +15,7 @@ import java.math.RoundingMode;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Goods {
+public class Goods implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
 

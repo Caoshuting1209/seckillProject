@@ -1,25 +1,34 @@
 package com.shuting.seckillproject.controller;
 
 import com.shuting.seckillproject.entity.Goods;
-import com.shuting.seckillproject.service.impl.GoodsService;
-import jakarta.annotation.Resource;
+import com.shuting.seckillproject.service.GoodsService;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@Slf4j
 public class GoodsController {
+//    Logger logger = LoggerFactory.getLogger(GoodsController.class);
+
     @Autowired
     private GoodsService goodsService;
 
     @GetMapping("/goods")
-    public String goodsName(Long gid){
-        Goods goods = goodsService.getGoods(gid);
+    public String goodsName(Long goodId){
+//        logger.info("goodId: " + goodId);
+        Goods goods = goodsService.getGoods(goodId);
         return goods.getName();
+    }
+
+    @GetMapping("/sell")
+    public String doSell(Long goodId){
+        goodsService.sellProject(goodId);
+        return "ok";
     }
 
     @PostMapping("/insert1")
