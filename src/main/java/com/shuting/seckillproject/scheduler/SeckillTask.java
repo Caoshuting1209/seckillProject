@@ -22,12 +22,23 @@ public class SeckillTask {
     public void startSeckill(){
         List<Seckills> list = seckillMapper.findUnstartSeckill();
         for (Seckills seckill : list) {
-            System.out.println(seckill.getId() + "号商品秒杀已启动");
+            System.out.println(seckill.getId() + " seckill is started.");
             for(int i =0; i < seckill.getGoodCount(); i++){
-                redisTemplate.opsForList().rightPush("seckill:count:" + seckill.getId(), seckill.getGoodId());
+                redisTemplate.opsForList().rightPush("seckill:goods:" + seckill.getId(), seckill.getGoodId());
             }
             seckill.setStatus(1);
             seckillMapper.updateStatus(seckill);
+        }
+    }
+
+    @Scheduled(cron = "0/5 * * * * ?")
+    public void endSeckill(){
+        List<Seckills> list = seckillMapper.findExpireSeckill();
+        for (Seckills seckill : list) {
+            System.out.println(seckill.getId() + " seckill is ended.");
+            seckill.setStatus(2);
+            seckillMapper.updateStatus(seckill);
+            redisTemplate.delete("seckill:goods:" + seckill.getId());
         }
     }
 }
