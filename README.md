@@ -1,36 +1,24 @@
+### springboot的一般框架
+
 Entity -> Mapper -> Service -> Controller
 
-mapper.xml -> mapper
-
-mapper.xml中SQL语句中的field name要和数据库保持一致，不用驼峰命名法
 
 
-
-mysql启动
-
-终端：mysql.server start
+> 引入mabatis plus依赖，可以不用mapper.xml文件来编写SQL语句，直接在Mapper中注解即可
+>
+> 注解中涉及到的SQL语句命名要和数据库保持一致，而不采用驼峰事命名
 
 
 
-redis启动
+### 终端程序启动方法
 
-终端：redis-server (ctrl + c)
+#### mysql启动： mysql.server start
 
-新开窗口：redis-cli (shut down)
+#### redis启动：redis-server (ctrl + c) / （新开窗口）redis-cli (shut down)
 
+#### J-meter（压力测试）：path -> sh jmeter
 
+##### 	add thread group / add http request / add listener
 
-J-meter（压力测试）启动
-
-./Jmeter（找到路径）
-
-sh jmeter
-
-add thread group / add http request / add listener
-
-
-
-Another-redis-destop-manager（redis可视化）
-
-Application-启动
+#### Another-redis-destop-manager（redis可视化）：直接在application中启动
 
