@@ -22,3 +22,13 @@ Entity -> Mapper -> Service -> Controller
 
 #### Another-redis-destop-manager（redis可视化）：直接在application中启动
 
+
+
+### 下一步待学习内容
+
+[RBAC权限控制系统1](https://www.bilibili.com/video/BV1vD421u7zU/?spm_id_from=333.788.player.switch&vd_source=c601dba09fcd5ed41170f2ff79a9a181&p=7)
+
+[RBAC权限控制系统2](https://www.bilibili.com/video/BV1N4vLePEu9?spm_id_from=333.788.videopod.episodes&vd_source=c601dba09fcd5ed41170f2ff79a9a181&p=8)
+
+
+
