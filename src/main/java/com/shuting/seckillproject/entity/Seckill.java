@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Data
 @TableName("seckill")
-public class Seckills implements Serializable {
+public class Seckill implements Serializable {
     @TableId(type = IdType.AUTO)
     private Long id;
 

@@ -1,8 +1,7 @@
 package com.shuting.seckillproject.scheduler;
 
-import com.shuting.seckillproject.entity.Seckills;
+import com.shuting.seckillproject.entity.Seckill;
 import com.shuting.seckillproject.mapper.SeckillMapper;
-import com.shuting.seckillproject.service.SeckillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -20,8 +19,8 @@ public class SeckillTask {
 
     @Scheduled(cron = "0/5 * * * * ?")
     public void startSeckill(){
-        List<Seckills> list = seckillMapper.findUnstartSeckill();
-        for (Seckills seckill : list) {
+        List<Seckill> list = seckillMapper.findUnstartSeckill();
+        for (Seckill seckill : list) {
             System.out.println(seckill.getId() + " seckill is started.");
             for(int i =0; i < seckill.getGoodCount(); i++){
                 redisTemplate.opsForList().rightPush("seckill:goods:" + seckill.getId(), seckill.getGoodId());
@@ -33,8 +32,8 @@ public class SeckillTask {
 
     @Scheduled(cron = "0/5 * * * * ?")
     public void endSeckill(){
-        List<Seckills> list = seckillMapper.findExpireSeckill();
-        for (Seckills seckill : list) {
+        List<Seckill> list = seckillMapper.findExpireSeckill();
+        for (Seckill seckill : list) {
             System.out.println(seckill.getId() + " seckill is ended.");
             seckill.setStatus(2);
             seckillMapper.updateStatus(seckill);

@@ -1,14 +1,10 @@
-package com.shuting.seckillproject.service;
+package com.shuting.seckillproject.service.impl;
 
 import com.shuting.seckillproject.entity.Goods;
 import com.shuting.seckillproject.mapper.GoodsMapper;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-
-
-import java.util.logging.Logger;
 
 @Service
 public class GoodsService {

@@ -1,9 +1,8 @@
 package com.shuting.seckillproject.controller;
 
 import com.shuting.seckillproject.entity.Goods;
-import com.shuting.seckillproject.service.GoodsService;
+import com.shuting.seckillproject.service.impl.GoodsService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
