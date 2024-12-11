@@ -12,10 +12,10 @@ public class User {
     @TableId(type = IdType.AUTO)
     private Long id;
 
-    @NotBlank(message = "用户名不能为空")
+    @NotBlank(message = "Username can't be null")
     private String userName;
 
-    @NotBlank(message = "密码不能为空")
+    @NotBlank(message = "Password can't be null")
     private String password;
 
     private String salt;

@@ -21,7 +21,7 @@ public class SeckillTask {
     public void startSeckill(){
         List<Seckill> list = seckillMapper.findUnstartSeckill();
         for (Seckill seckill : list) {
-            System.out.println(seckill.getId() + " seckill is started.");
+            System.out.println(seckill.getId() + " seckill is started");
             for(int i =0; i < seckill.getGoodCount(); i++){
                 redisTemplate.opsForList().rightPush("seckill:goods:" + seckill.getId(), seckill.getGoodId());
             }
@@ -34,7 +34,7 @@ public class SeckillTask {
     public void endSeckill(){
         List<Seckill> list = seckillMapper.findExpireSeckill();
         for (Seckill seckill : list) {
-            System.out.println(seckill.getId() + " seckill is ended.");
+            System.out.println(seckill.getId() + " seckill is ended");
             seckill.setStatus(2);
             seckillMapper.updateStatus(seckill);
             redisTemplate.delete("seckill:goods:" + seckill.getId());

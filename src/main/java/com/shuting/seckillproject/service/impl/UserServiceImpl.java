@@ -4,8 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shuting.seckillproject.common.Constants;
-import com.shuting.seckillproject.common.LoginUser;
+import com.shuting.seckillproject.entity.LoginUser;
 import com.shuting.seckillproject.entity.User;
+import com.shuting.seckillproject.exception.GlobalException;
 import com.shuting.seckillproject.mapper.UserMapper;
 import com.shuting.seckillproject.service.UserService;
 import com.shuting.seckillproject.utils.MD5Util;
@@ -21,7 +22,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name", user.getUserName());
         if(userMapper.selectOne(queryWrapper) != null){
-            return Constants.USER_ALREADY_EXIST;
+            throw new GlobalException(Constants.USER_ALREADY_EXIST);
         }
         String inputPassword = user.getPassword();
         user.setSalt("1a2b3c4d");
@@ -30,7 +31,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if(insert == 1){
             return Constants.SUCCESS;
         }else {
-            return Constants.ERROR;
+            throw new GlobalException(Constants.ERROR);
         }
     }
 
@@ -38,14 +39,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         String name = loginUser.getUserName();
         String password = loginUser.getPassword();
         if(StringUtils.isEmpty(name) || StringUtils.isEmpty(password)){
-            return Constants.LOGIN_ERROR;
+            throw new GlobalException(Constants.LOGIN_ERROR);
         }
         User user = userMapper.selectByName(loginUser.getUserName());
         if(user == null){
-            return Constants.USER_NOT_EXIST;
+            throw new GlobalException(Constants.USER_NOT_EXIST);
         }
         if(!MD5Util.inputPassToDBPass(password,user.getSalt()).equals(user.getPassword())){
-            return Constants.PASSWORD_ERROR;
+            throw new GlobalException(Constants.PASSWORD_ERROR);
         }
         return Constants.SUCCESS;
     }
