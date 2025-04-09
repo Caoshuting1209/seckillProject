@@ -11,26 +11,38 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GoodsService {
-    @Autowired
-    private GoodsMapper goodsMapper;
+    @Autowired private GoodsMapper goodsMapper;
 
     @Cacheable(value = "good", key = "#goodId")
     public Goods getGoods(Long goodId) {
         return goodsMapper.findById(goodId);
     }
 
-    public boolean insertGoods(Goods goods) {
-        return goodsMapper.insert(goods) > 0;
+    public Result insertGoods(Goods goods) {
+        goods.setDiscount();
+        if(goodsMapper.insert(goods) > 0){
+            return Result.success(Constants.SUCCESS);
+        } else {
+            return Result.success(Constants.ERROR);
+        }
     }
 
-    public boolean updateGoodsCount(Long goodId, Integer count) {
+    public Result updateGoodsCount(Long goodId, Integer count) {
         Goods goods = getGoods(goodId);
         goods.setStock(count);
-        return goodsMapper.updateById(goods) > 0;
+        if(goodsMapper.updateById(goods) > 0){
+            return Result.success(Constants.SUCCESS);
+        } else {
+            return Result.success(Constants.ERROR);
+        }
     }
 
-    public boolean deleteGoods(Long goodId) {
-        return goodsMapper.delById(goodId);
+    public Result deleteGoods(Long goodId) {
+        if(goodsMapper.delById(goodId)){
+            return Result.success(Constants.SUCCESS);
+        } else {
+            return Result.success(Constants.ERROR);
+        }
     }
 
     public Result sellProject(Long goodId) {

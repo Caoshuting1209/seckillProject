@@ -15,12 +15,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SeckillService {
-    @Autowired
-    private SeckillMapper seckillMapper;
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private RedisTemplate redisTemplate;
+    @Autowired private SeckillMapper seckillMapper;
+    @Autowired private UserMapper userMapper;
+    @Autowired private RedisTemplate redisTemplate;
 
     public Result seckillPro(Integer goodId, String userName) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();

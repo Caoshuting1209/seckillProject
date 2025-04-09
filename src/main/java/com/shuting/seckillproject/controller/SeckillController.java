@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SeckillController {
-    @Autowired
-    private SeckillService seckillService;
+    @Autowired private SeckillService seckillService;
 
     @GetMapping("/seckill")
     public Result processSeckill(Integer goodId, String userName) {

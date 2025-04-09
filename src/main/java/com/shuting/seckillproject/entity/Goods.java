@@ -30,7 +30,7 @@ public class Goods implements Serializable {
 
     public void setDiscount() {
         if (this.originalPrice != null && this.currentPrice != null) {
-            BigDecimal bd = new BigDecimal((this.originalPrice - this.currentPrice) / this.currentPrice);
+            BigDecimal bd = new BigDecimal((this.originalPrice - this.currentPrice) / this.originalPrice);
             this.discount = bd.setScale(3, RoundingMode.HALF_UP);
         }
     }
