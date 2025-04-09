@@ -10,20 +10,18 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
+//用来判断正在进行中的seckill
 public class SeckillTask {
-    @Autowired
-    private SeckillMapper seckillMapper;
-
-    @Autowired
-    private RedisTemplate redisTemplate;
+    @Autowired private SeckillMapper seckillMapper;
+    @Autowired private RedisTemplate redisTemplate;
 
     @Scheduled(cron = "0/5 * * * * ?")
-    public void startSeckill(){
+    public void startSeckill() {
         List<Seckill> list = seckillMapper.findUnstartSeckill();
         for (Seckill seckill : list) {
             System.out.println(seckill.getId() + " seckill is started");
-            for(int i =0; i < seckill.getGoodCount(); i++){
-                redisTemplate.opsForList().rightPush("seckill:goods:" + seckill.getId(), seckill.getGoodId());
+            for (int i = 0; i < seckill.getGoodCount(); i++) {
+                redisTemplate.opsForList().rightPush("seckill: " + seckill.getId(), seckill.getGoodId());
             }
             seckill.setStatus(1);
             seckillMapper.updateStatus(seckill);
@@ -31,13 +29,13 @@ public class SeckillTask {
     }
 
     @Scheduled(cron = "0/5 * * * * ?")
-    public void endSeckill(){
+    public void endSeckill() {
         List<Seckill> list = seckillMapper.findExpireSeckill();
         for (Seckill seckill : list) {
             System.out.println(seckill.getId() + " seckill is ended");
             seckill.setStatus(2);
             seckillMapper.updateStatus(seckill);
-            redisTemplate.delete("seckill:goods:" + seckill.getId());
+            redisTemplate.delete("seckill: " + seckill.getId());
         }
     }
 }

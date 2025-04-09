@@ -1,14 +1,17 @@
-package com.shuting.seckillproject.service.impl;
+package com.shuting.seckillproject.service;
 
+import com.shuting.seckillproject.common.http.Constants;
+import com.shuting.seckillproject.common.http.Result;
 import com.shuting.seckillproject.entity.Goods;
 import com.shuting.seckillproject.mapper.GoodsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class GoodsService {
-    @Autowired(required = true)
+    @Autowired
     private GoodsMapper goodsMapper;
 
     @Cacheable(value = "good", key = "#goodId")
@@ -18,12 +21,6 @@ public class GoodsService {
 
     public boolean insertGoods(Goods goods) {
         return goodsMapper.insert(goods) > 0;
-    }
-
-    public boolean updateGoods() {
-        Goods goods = getGoods(1L);
-        goods.setStock(10);
-        return goodsMapper.updateById(goods) > 0;
     }
 
     public boolean updateGoodsCount(Long goodId, Integer count) {
@@ -36,14 +33,14 @@ public class GoodsService {
         return goodsMapper.delById(goodId);
     }
 
-    public void sellProject(Long goodId){
+    public Result sellProject(Long goodId) {
         Integer count = getGoods(goodId).getStock();
-        if(count > 0){
-            System.out.println("抢购成功");
+        if (count > 0) {
             count = count - 1;
-            updateGoodsCount(goodId,count);
-        }else{
-            System.out.println("抢购失败");
+            updateGoodsCount(goodId, count);
+            return Result.success(Constants.SUCCESS);
+        } else {
+            return Result.error(Constants.SOLD_OUT_ERROR);
         }
     }
 }

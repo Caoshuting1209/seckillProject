@@ -16,7 +16,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableCaching //开启声明式缓存，利用注解进行redis读写
 @EnableScheduling
 public class SeckillProjectApplication {
-    //修改默认的redisTemplate持久化方式
     @Bean
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
@@ -27,9 +26,9 @@ public class SeckillProjectApplication {
         //设置key的序列化方式为String
         template.setKeySerializer(new StringRedisSerializer());
         return template;
-    };
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(SeckillProjectApplication.class, args);
     }
-
 }

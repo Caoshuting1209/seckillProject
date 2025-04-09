@@ -1,6 +1,6 @@
-package com.shuting.seckillproject.exception;
+package com.shuting.seckillproject.common.config.exceptionConfig;
 
-import com.shuting.seckillproject.common.Constants;
+import com.shuting.seckillproject.common.http.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

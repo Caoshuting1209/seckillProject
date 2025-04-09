@@ -7,14 +7,18 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public interface SeckillMapper extends BaseMapper<Seckill> {
     @Select("SELECT * FROM seckill WHERE now() BETWEEN start_time AND end_time and status = 0")
-    public List<Seckill> findUnstartSeckill();
+    List<Seckill> findUnstartSeckill();
 
-    @Select("SELECT * FROM seckill WHERE now() > end_time and status = 1")
-    public List<Seckill> findExpireSeckill();
+    @Select("SELECT * FROM seckill WHERE status = 1 and (now() > end_time or good_count = 0)")
+    List<Seckill> findExpireSeckill();
+
+    @Select("SELECT * FROM seckill WHERE good_id = #{goodId}")
+    Seckill selectByGoodId(Integer goodId);
 
     @Update("UPDATE seckill SET good_id = #{goodId}, good_count = #{goodCount}, start_time = #{startTime}, end_time = #{endTime}, status = #{status}, current_price = #{currentPrice} WHERE id = #{id}")
-    public void updateStatus(Seckill seckill);
+    void updateStatus(Seckill seckill);
 }

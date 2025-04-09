@@ -25,18 +25,9 @@ spring:
             timeout: 3000ms
 
 mybatis-plus:
-    mapper-locations: classpath:/mapper/*.xml
     type-aliases-package: com.shuting.seckillproject.entity
-
-logging:
-    level:
-        com.shuting.seckillproject.mapper: debug
-
-springdoc:
-    api-docs:
-        enabled: true
-    swagger-ui:
-        enabled: true
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 
 

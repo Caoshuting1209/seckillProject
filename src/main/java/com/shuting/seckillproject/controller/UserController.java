@@ -1,6 +1,7 @@
 package com.shuting.seckillproject.controller;
 
-import com.shuting.seckillproject.common.Constants;
+import com.shuting.seckillproject.common.http.Result;
+import com.shuting.seckillproject.entity.LoginUser;
 import com.shuting.seckillproject.entity.User;
 import com.shuting.seckillproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +12,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/register")
-public class RegisterController {
+@RequestMapping("/user")
+public class UserController {
     @Autowired
     private UserService userService;
 
+    @PostMapping("/doLogin")
+    @ResponseBody
+    public Result doLogin(@Validated LoginUser loginUser) {
+        return userService.doLogin(loginUser);
+    }
+
     @PostMapping("/doRegister")
     @ResponseBody
-    public Constants doRegister(@Validated User user) {
+    public Result doRegister(@Validated User user) {
         return userService.doRegister(user);
     }
 }

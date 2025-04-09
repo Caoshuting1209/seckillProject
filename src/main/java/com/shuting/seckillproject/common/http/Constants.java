@@ -1,7 +1,6 @@
-package com.shuting.seckillproject.common;
+package com.shuting.seckillproject.common.http;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -10,6 +9,7 @@ import lombok.ToString;
 @ToString
 public enum Constants {
     SUCCESS("200", "success"),
+    SUCCESS_BUYING("201", "successful buying"),
     ERROR("500", "error"),
     BINDING_ERROR("800", "binding error"),
 
